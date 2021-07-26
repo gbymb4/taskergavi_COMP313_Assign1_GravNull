@@ -41,13 +41,13 @@ public:
 		float GetSpeed();
 
 	UFUNCTION(BlueprintCallable, Category = "Player")
-		void SetSpeed(float nSpeed);
+		float SetSpeed(float nSpeed);
 
 	UFUNCTION(BlueprintPure, Category = "Player")
 		int GetHealth();
 
 	UFUNCTION(BlueprintCallable, Category = "Player")
-		void SetHealth(int nHealth);
+		int SetHealth(int nHealth);
 
 	UFUNCTION(BlueprintPure, Category = "Player")
 		float GetMaxSpeed();

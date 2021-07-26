@@ -39,10 +39,10 @@ float APlayerCharacter::GetSpeed()
 	return speed;
 }
 
-void APlayerCharacter::SetSpeed(float nSpeed)
+float APlayerCharacter::SetSpeed(float nSpeed)
 {
-	float nTotalSpeed = GetSpeed() + nSpeed;
-	speed = nTotalSpeed > GetMaxSpeed() ? GetMaxSpeed() : nTotalSpeed < GetMinSpeed() ? GetMinSpeed() : nTotalSpeed; //Protect Against Improper Use
+	speed = nSpeed > GetMaxSpeed() ? GetMaxSpeed() : (nSpeed < GetMinSpeed() ? GetMinSpeed() : nSpeed); //Protect Against Improper Use
+	return GetSpeed();
 }
 
 int APlayerCharacter::GetHealth()
@@ -50,10 +50,10 @@ int APlayerCharacter::GetHealth()
 	return health;
 }
 
-void APlayerCharacter::SetHealth(int nHealth)
+int APlayerCharacter::SetHealth(int nHealth)
 {
-	int nTotalHealth = GetHealth() + nHealth;
-	health = nTotalHealth > GetMaxHealth() ? GetMaxHealth() : nTotalHealth < GetMinHealth() ? GetMinHealth() : nTotalHealth; //Protect Against Improper Use
+	health = nHealth > GetMaxHealth() ? GetMaxHealth() : (nHealth < GetMinHealth() ? GetMinHealth() : nHealth); //Protect Against Improper Use
+	return GetHealth();
 }
 
 float APlayerCharacter::GetMaxSpeed()
