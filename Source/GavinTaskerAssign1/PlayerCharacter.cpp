@@ -2,6 +2,8 @@
 
 
 #include "PlayerCharacter.h"
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -42,6 +44,10 @@ float APlayerCharacter::GetSpeed()
 float APlayerCharacter::SetSpeed(float nSpeed)
 {
 	speed = nSpeed > GetMaxSpeed() ? GetMaxSpeed() : (nSpeed < GetMinSpeed() ? GetMinSpeed() : nSpeed); //Protect Against Improper Use
+
+	UCharacterMovementComponent* playerController = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0)->GetCharacterMovement(); 
+	playerController->MaxWalkSpeed = speed; //Update Controller Walking Speed
+
 	return GetSpeed();
 }
 

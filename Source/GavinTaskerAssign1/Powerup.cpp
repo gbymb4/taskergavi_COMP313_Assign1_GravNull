@@ -2,8 +2,11 @@
 
 
 #include "Powerup.h"
+#include "PlayerCharacter.h"
+
 #include "Components/StaticMeshComponent.h"
 #include "Components/CapsuleComponent.h"
+
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -15,11 +18,16 @@ APowerup::APowerup()
 	PowerupModel = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Powerup Model"));
 	PlayerCollider = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Player Collider"));
 
-	PlayerCollider->InitCapsuleSize(34.f, 88.f);
+	PowerupModel->SetEnableGravity(false);
+	PowerupModel->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	RootComponent = PowerupModel;
 
+	PlayerCollider->InitCapsuleSize(50.f, 90.f);
 	PlayerCollider->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	PlayerCollider->SetEnableGravity(false);
+
+	active = false;
 }
 
 // Called when the game starts or when spawned
@@ -42,13 +50,17 @@ void APowerup::OnOverlapActorBegin(UPrimitiveComponent* OverlappedComponent,
 	int32 OtherBodyIndex, bool bFromSweep,
 	const FHitResult& SweepResult)
 {
-	
-
+	if(OtherActor->IsA(APlayerCharacter::StaticClass())) active = true;
 }
 
 void APowerup::OnOverlapActorEnd(UPrimitiveComponent* OverlappedComponent,
 	AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex)
 {
+	if (OtherActor->IsA(APlayerCharacter::StaticClass())) active = false;
+}
 
+bool APowerup::GetIsActive()
+{
+	return active;
 }

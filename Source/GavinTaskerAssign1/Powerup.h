@@ -21,9 +21,12 @@ public:
 	// Sets default values for this actor's properties
 	APowerup();
 
+	bool active;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
 
 public:	
 	// Called every frame
@@ -39,5 +42,8 @@ public:
 		void OnOverlapActorEnd(UPrimitiveComponent* OverlappedComponent,
 			AActor* OtherActor, UPrimitiveComponent* OtherComp,
 			int32 OtherBodyIndex);
+
+	UFUNCTION(BlueprintPure, Category = "Powerup")
+		bool GetIsActive();
 
 };
