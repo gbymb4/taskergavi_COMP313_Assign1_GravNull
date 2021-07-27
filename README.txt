@@ -13,6 +13,9 @@ Game Title:
 Video Link: 
 	https://mega.nz/file/QR4kCQxK#OQfL0GrhCsf1W9ui98Lk8QNvKxCS0k8vrGoRJoWS0LA
 
+Github Link:
+	https://github.com/gbymb4/taskergavi_COMP313_Assign1_GravNull
+
 Game Description:
 
 	My game is a 2.5D platformer where the objective is to collect all 5 scoring items
